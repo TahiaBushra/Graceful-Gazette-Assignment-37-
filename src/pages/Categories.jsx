@@ -10,10 +10,11 @@ const Categories = () => {
       {categories.map((category, index) => (
         <Link
           onMouseOver={() => setExpandCategory(index)}
+          to={`/categories${category.url}`}
           key={category.id}
           className={`h-full ${
             index === expandCategory ? "w-[calc(100vw-60vw)]" : "w-[20vw]"
-          } overflow-hidden relative`}
+          } overflow-hidden relative transition-[width] duration-500 ease-in-out`}
         >
           <img
             src={category.banner}
@@ -25,7 +26,9 @@ const Categories = () => {
             <h2 className="text-4xl font-semibold antialiased">
               {category.title}
             </h2>
-            <p className="hidden">{category.description}</p>
+            <p className={expandCategory === index ? "block" : "hidden"}>
+              {category.description}
+            </p>
           </div>
         </Link>
       ))}
