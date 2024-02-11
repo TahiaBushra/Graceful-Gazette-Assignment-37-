@@ -4,7 +4,7 @@ import { categories } from "../data/categories";
 import { useState } from "react";
 
 const Categories = () => {
-  const [expandCategory, setExpandCategory] = useState(0);
+  const [expandCategory, setExpandCategory] = useState(2);
   return (
     <div className="w-screen h-screen flex">
       {categories.map((category, index) => (
@@ -13,8 +13,8 @@ const Categories = () => {
           to={`/categories${category.url}`}
           key={category.id}
           className={`h-full ${
-            index === expandCategory ? "w-[calc(100vw-60vw)]" : "w-[20vw]"
-          } overflow-hidden relative transition-[width] duration-500 ease-in-out`}
+            index === expandCategory ? "w-[40vw]" : "w-[20vw]"
+          } overflow-hidden relative`}
         >
           <img
             src={category.banner}
