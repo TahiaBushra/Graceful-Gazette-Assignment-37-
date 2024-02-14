@@ -1,37 +1,127 @@
-import { Home } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  BadgeX,
+  Facebook,
+  Home,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Youtube,
+} from "lucide-react";
+import { useState } from "react";
 import { Link, useResolvedPath } from "react-router-dom";
 
+const navItems = [
+  { label: "Home", url: "/" },
+  { label: "Categories", url: "/categories" },
+  { label: "Saved Items", url: "/saved" },
+  { label: "About", url: "/about" },
+  { label: "Contact", url: "/contact" },
+];
 const Header = () => {
+  const [navAppear, setNavAppear] = useState(false);
   const { pathname } = useResolvedPath();
   return (
-    <div
-      class={`flex fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-20 ${
-        pathname === "/" ? "justify-center" : "justify-between "
-      }`}
-    >
-      <div className={`${pathname === "/" ? "hidden" : "inline-block"}`}>
-        <div className="flex backdrop-blur-lg rounded-full bg-white/80 border overflow-hidden">
-          <div className="bg-transparent rounded-full w-20 h-auto">
-            <img
-              src="/src/assets/images/360_F_212421503_4JHrc9KSU6fQIPv18KIl5i2QgvvQydit-removebg-preview.png"
-              alt="purple feather"
-              className="w-full h-full object-cover rounded-full opacity-80"
-            />
-          </div>
-          <div className="flex flex-col antialiased truncate pr-5 tracking-tighter">
-            <Link className="text-3xl font-bold text-fuchsia-500 text-center">
-              G<span className="text-pink-500">G</span>
-            </Link>
-            <p className="text-pink-500 font-semibold text-lg">
-              Graceful <span className="text-fuchsia-500">Gazette</span>
-            </p>
+    <>
+      <div
+        className={`flex fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-20 ${
+          pathname === "/" ? "justify-center" : "justify-between "
+        }`}
+      >
+        <div className={`${pathname === "/" ? "hidden" : "inline-block"}`}>
+          <div className="flex backdrop-blur-lg rounded-full border overflow-hidden bg">
+            <div className="rounded-2xl w-52 h-auto bg-gray-900">
+              <img
+                src="/src/assets/images/New_Project-removebg-preview (1).png"
+                alt="fashion pic"
+                className="w-full h-full object-cover hover:scale-110 transition duration-300 ease-in-out"
+              />
+            </div>
           </div>
         </div>
+        <button
+          onClick={() => setNavAppear(!navAppear)}
+          className="aspect-square w-14 border backdrop-blur-lg rounded-full flex items-center justify-center bg-gradient-to-tr from-amber-50 to-orange-100 text-gray-900 hover:scale-125 transition duration-300 ease-in-out"
+        >
+          <Home absoluteStrokeWidth size={25} />
+        </button>
       </div>
-      <button className="w-10 aspect-square bg-white/80 border backdrop-blur-lg rounded-full flex items-center justify-center text-emerald-700">
-        <Home absoluteStrokeWidth size={25} />
-      </button>
-    </div>
+      <AnimatePresence>
+        {navAppear && (
+          <motion.div
+            onClick={() => setNavAppear(false)}
+            initial={{ x: "25vw" }}
+            whileInView={{ x: 0 }}
+            exit={{ x: "25vw" }}
+            transition={{ duration: 0.75, ease: "easeInOut" }}
+            className="fixed right-0 top-0 bottom-0 w-[25vw] h-full bg-zinc-50 z-[101] shadow-2xl"
+          >
+            <button
+              onClick={() => setNavAppear(false)}
+              className="top-5 right-5 absolute z-[102] hover:scale-125 transition duration-300 ease-in-out"
+            >
+              <BadgeX absoluteStrokeWidth size={25} />
+            </button>
+            <div className="px-5 pt-14 flex flex-col gap-5 items-start">
+              <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
+                Navigations
+              </p>
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.url}
+                  to={item.url}
+                  className="text-3xl font-semibold text-gray-700 overflow-hidden"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <div className="pb-5 px-5 sm:mt-40 flex flex-col gap-5 items-start">
+              <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
+                Socials
+              </p>
+              <div className="flex items-center gap-5 text-gray-700">
+                <Link
+                  to="/"
+                  target="_blank"
+                  className="hover:scale-125 transition duration-300 ease-in-out"
+                >
+                  <Facebook color="dodgerblue" size={24} />
+                </Link>
+                <Link
+                  to="/"
+                  target="_blank"
+                  className="hover:scale-125 transition duration-300 ease-in-out"
+                >
+                  <Instagram color="violet" size={24} />
+                </Link>
+                <Link
+                  to="/"
+                  target="_blank"
+                  className="hover:scale-125 transition duration-300 ease-in-out"
+                >
+                  <Twitter color="deepskyblue" size={24} />
+                </Link>
+                <Link
+                  to="/"
+                  target="_blank"
+                  className="hover:scale-125 transition duration-300 ease-in-out"
+                >
+                  <Linkedin size={24} />
+                </Link>
+                <Link
+                  to="/"
+                  target="_blank"
+                  className="hover:scale-125 transition duration-300 ease-in-out"
+                >
+                  <Youtube color="red" size={24} />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

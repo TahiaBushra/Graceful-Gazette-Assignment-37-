@@ -16,39 +16,39 @@ const Home = () => {
         </Link>
       </div>
       {/* Social Links */}
-      <div className="absolute bottom-10 right-10 z-[3] flex items-center gap-5">
+      <div className="absolute bottom-10 right-10 z-[3] flex items-center justify-center gap-5">
         <Link
           to="https://www.facebook.com/"
           target="_blank"
-          className="hover:scale-150"
+          className="hover:scale-125 transition duration-300 ease-in-out"
         >
           <Facebook color="dodgerblue" size={30} />
         </Link>
         <Link
           to="https://www.instagram.com/"
           target="_blank"
-          className="hover:scale-150"
+          className="hover:scale-125 transition duration-300 ease-in-out"
         >
           <Instagram color="violet" size={30} />
         </Link>
         <Link
           to="https://twitter.com/i/flow/login"
           target="_blank"
-          className="hover:scale-150"
+          className="hover:scale-125 transition duration-300 ease-in-out"
         >
           <Twitter color="deepskyblue" size={30} />
         </Link>
         <Link
           to="https://www.linkedin.com/login"
           target="_blank"
-          className="hover:scale-150"
+          className="hover:scale-125 transition duration-300 ease-in-out"
         >
           <Linkedin color="aliceblue" size={30} />
         </Link>
         <Link
           to="https://www.youtube.com/"
           target="_blank"
-          className="hover:scale-150"
+          className="hover:scale-125 transition duration-300 ease-in-out"
         >
           <Youtube color="red" size={30} />
         </Link>
