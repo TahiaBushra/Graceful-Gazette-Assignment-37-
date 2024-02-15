@@ -8,8 +8,9 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useResolvedPath } from "react-router-dom";
+import { BlogContext } from "../contexts/BlogContext";
 
 const navItems = [
   { label: "Home", url: "/" },
@@ -20,6 +21,7 @@ const navItems = [
 ];
 const Header = () => {
   const [navAppear, setNavAppear] = useState(false);
+  const [state, dispatch] = useContext(BlogContext);
   const { pathname } = useResolvedPath();
   return (
     <>
@@ -48,77 +50,84 @@ const Header = () => {
       </div>
       <AnimatePresence>
         {navAppear && (
-          <motion.div
-            onClick={() => setNavAppear(false)}
-            initial={{ x: "25vw" }}
-            whileInView={{ x: 0 }}
-            exit={{ x: "25vw" }}
-            transition={{ duration: 0.75, ease: "easeInOut" }}
-            className="fixed right-0 top-0 bottom-0 w-[25vw] h-full bg-zinc-50 z-[101] shadow-2xl"
-          >
-            <button
+          <>
+            <div
               onClick={() => setNavAppear(false)}
-              className="top-5 right-5 absolute z-[102] hover:scale-125 transition duration-300 ease-in-out"
+              className="fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-transparent z-[100]"
+            ></div>
+            <motion.div
+              onClick={() => setNavAppear(false)}
+              initial={{ x: "25vw" }}
+              whileInView={{ x: 0 }}
+              exit={{ x: "25vw" }}
+              transition={{ duration: 0.75, ease: "easeInOut" }}
+              className="fixed right-0 top-0 bottom-0 w-[25vw] h-full bg-zinc-50 z-[101] shadow-2xl"
             >
-              <BadgeX absoluteStrokeWidth size={25} />
-            </button>
-            <div className="px-5 pt-14 flex flex-col gap-5 items-start">
-              <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
-                Navigations
-              </p>
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.url}
-                  to={item.url}
-                  className="text-3xl font-semibold text-gray-700 overflow-hidden"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <div className="pb-5 px-5 sm:mt-40 flex flex-col gap-5 items-start">
-              <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
-                Socials
-              </p>
-              <div className="flex items-center gap-5 text-gray-700">
-                <Link
-                  to="/"
-                  target="_blank"
-                  className="hover:scale-125 transition duration-300 ease-in-out"
-                >
-                  <Facebook color="dodgerblue" size={24} />
-                </Link>
-                <Link
-                  to="/"
-                  target="_blank"
-                  className="hover:scale-125 transition duration-300 ease-in-out"
-                >
-                  <Instagram color="violet" size={24} />
-                </Link>
-                <Link
-                  to="/"
-                  target="_blank"
-                  className="hover:scale-125 transition duration-300 ease-in-out"
-                >
-                  <Twitter color="deepskyblue" size={24} />
-                </Link>
-                <Link
-                  to="/"
-                  target="_blank"
-                  className="hover:scale-125 transition duration-300 ease-in-out"
-                >
-                  <Linkedin size={24} />
-                </Link>
-                <Link
-                  to="/"
-                  target="_blank"
-                  className="hover:scale-125 transition duration-300 ease-in-out"
-                >
-                  <Youtube color="red" size={24} />
-                </Link>
+              <button
+                onClick={() => setNavAppear(false)}
+                className="top-5 right-5 absolute z-[102] hover:scale-125 transition duration-300 ease-in-out"
+              >
+                <BadgeX absoluteStrokeWidth size={25} />
+              </button>
+              <div className="px-5 pt-14 flex flex-col gap-5 items-start">
+                <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
+                  Navigations
+                </p>
+                {navItems.map((item, index) => (
+                  <Link
+                    key={item.url}
+                    to={item.url}
+                    className="text-3xl font-semibold text-gray-700 overflow-hidden"
+                  >
+                    {item.label}{" "}
+                    {item.url === "/saved" && `(${state?.blogs?.length})`}
+                  </Link>
+                ))}
               </div>
-            </div>
-          </motion.div>
+              <div className="pb-5 px-5 sm:mt-40 flex flex-col gap-5 items-start">
+                <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
+                  Socials
+                </p>
+                <div className="flex items-center gap-5 text-gray-700">
+                  <Link
+                    to="/"
+                    target="_blank"
+                    className="hover:scale-125 transition duration-300 ease-in-out"
+                  >
+                    <Facebook color="dodgerblue" size={24} />
+                  </Link>
+                  <Link
+                    to="/"
+                    target="_blank"
+                    className="hover:scale-125 transition duration-300 ease-in-out"
+                  >
+                    <Instagram color="violet" size={24} />
+                  </Link>
+                  <Link
+                    to="/"
+                    target="_blank"
+                    className="hover:scale-125 transition duration-300 ease-in-out"
+                  >
+                    <Twitter color="deepskyblue" size={24} />
+                  </Link>
+                  <Link
+                    to="/"
+                    target="_blank"
+                    className="hover:scale-125 transition duration-300 ease-in-out"
+                  >
+                    <Linkedin size={24} />
+                  </Link>
+                  <Link
+                    to="/"
+                    target="_blank"
+                    className="hover:scale-125 transition duration-300 ease-in-out"
+                  >
+                    <Youtube color="red" size={24} />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
