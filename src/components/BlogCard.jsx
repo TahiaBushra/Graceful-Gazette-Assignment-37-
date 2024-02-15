@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BlogContext } from "../contexts/BlogContext";
+import { motion } from "framer-motion";
 
-const BlogCard = ({ blog, catid }) => {
+const BlogCard = ({ blog, catid, index }) => {
   const [hasBeenSaved, setHasBeenSaved] = useState(false);
   const [state, dispatch] = useContext(BlogContext);
 
@@ -17,7 +18,12 @@ const BlogCard = ({ blog, catid }) => {
   }, [state]);
 
   return (
-    <div className="w-full p-5 rounded-2xl bg-slate-50 flex flex-col gap-5 shadow-lg">
+    <motion.div
+      initial={{ y: "10%", opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1, ease: "easeInOut", delay: index * 0.25 }}
+      className="w-full p-5 rounded-2xl bg-slate-50 flex flex-col gap-5 shadow-lg"
+    >
       <Link
         to={`/categories${catid}/${blog.id} `}
         className="w-full aspect-[5/4] overflow-hidden rounded-xl group"
@@ -59,7 +65,7 @@ const BlogCard = ({ blog, catid }) => {
           </button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

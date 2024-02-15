@@ -26,30 +26,39 @@ const Header = () => {
   return (
     <>
       <div
-        className={`flex fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-20 ${
+        className={`flex overflow-hidden fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-20 ${
           pathname === "/" ? "justify-center" : "justify-between "
         }`}
       >
-        <Link
-          to="/"
-          className={`${pathname === "/" ? "hidden" : "inline-block"}`}
+        <motion.div
+          initial={{ y: "-100%" }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.75, ease: "easeInOut" }}
         >
-          <div className="flex backdrop-blur-lg rounded-full border overflow-hidden bg">
-            <div className="rounded-2xl w-52 h-auto bg-gray-900 cursor-pointer">
-              <img
-                src="/src/assets/images/New_Project-removebg-preview (1).png"
-                alt="fashion pic"
-                className="w-full h-full object-cover hover:scale-110 transition duration-300 ease-in-out"
-              />
+          <Link
+            to="/"
+            className={`${pathname === "/" ? "hidden" : "inline-block"}`}
+          >
+            <div className="flex backdrop-blur-lg rounded-full border overflow-hidden bg">
+              <div className="rounded-2xl w-52 h-auto bg-gray-900 cursor-pointer">
+                <img
+                  src="/src/assets/images/New_Project-removebg-preview (1).png"
+                  alt="fashion pic"
+                  className="w-full h-full object-cover hover:scale-110 transition duration-300 ease-in-out"
+                />
+              </div>
             </div>
-          </div>
-        </Link>
-        <button
+          </Link>
+        </motion.div>
+        <motion.button
+          initial={{ y: "-100%" }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.75, ease: "easeInOut" }}
           onClick={() => setNavAppear(!navAppear)}
-          className="aspect-square w-14 border backdrop-blur-lg rounded-full flex items-center justify-center bg-gradient-to-tr from-amber-50 to-orange-100 text-gray-900 hover:scale-125 transition duration-300 ease-in-out"
+          className="aspect-square w-14 border backdrop-blur-lg rounded-full flex items-center justify-center bg-zinc-50 text-gray-900 hover:scale-125 transition duration-300 ease-in-out"
         >
           <Home absoluteStrokeWidth size={25} />
-        </button>
+        </motion.button>
       </div>
       <AnimatePresence>
         {navAppear && (
@@ -82,8 +91,18 @@ const Header = () => {
                     to={item.url}
                     className="text-3xl font-semibold text-gray-700 overflow-hidden"
                   >
-                    {item.label}{" "}
-                    {item.url === "/saved" && `(${state?.blogs?.length})`}
+                    <motion.div
+                      initial={{ y: "100%" }}
+                      whileInView={{ y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeInOut",
+                        delay: 0.125 * index,
+                      }}
+                    >
+                      {item.label}{" "}
+                      {item.url === "/saved" && `(${state?.blogs?.length})`}
+                    </motion.div>
                   </Link>
                 ))}
               </div>
@@ -91,42 +110,53 @@ const Header = () => {
                 <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
                   Socials
                 </p>
-                <div className="flex items-center gap-5 text-gray-700">
-                  <Link
-                    to="/"
-                    target="_blank"
-                    className="hover:scale-125 transition duration-300 ease-in-out"
+                <div className="flex overflow-hidden items-center gap-5 text-gray-700">
+                  <motion.div
+                    initial={{ y: "100%" }}
+                    whileInView={{ y: 0 }}
+                    transition={{
+                      duration: 0.75,
+                      ease: "easeInOut",
+                      delay: 0.5,
+                    }}
+                    className="hidden md:flex items-center gap-5"
                   >
-                    <Facebook color="dodgerblue" size={24} />
-                  </Link>
-                  <Link
-                    to="/"
-                    target="_blank"
-                    className="hover:scale-125 transition duration-300 ease-in-out"
-                  >
-                    <Instagram color="violet" size={24} />
-                  </Link>
-                  <Link
-                    to="/"
-                    target="_blank"
-                    className="hover:scale-125 transition duration-300 ease-in-out"
-                  >
-                    <Twitter color="deepskyblue" size={24} />
-                  </Link>
-                  <Link
-                    to="/"
-                    target="_blank"
-                    className="hover:scale-125 transition duration-300 ease-in-out"
-                  >
-                    <Linkedin size={24} />
-                  </Link>
-                  <Link
-                    to="/"
-                    target="_blank"
-                    className="hover:scale-125 transition duration-300 ease-in-out"
-                  >
-                    <Youtube color="red" size={24} />
-                  </Link>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      className="hover:scale-125 transition duration-300 ease-in-out"
+                    >
+                      <Facebook color="dodgerblue" size={24} />
+                    </Link>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      className="hover:scale-125 transition duration-300 ease-in-out"
+                    >
+                      <Instagram color="violet" size={24} />
+                    </Link>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      className="hover:scale-125 transition duration-300 ease-in-out"
+                    >
+                      <Twitter color="deepskyblue" size={24} />
+                    </Link>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      className="hover:scale-125 transition duration-300 ease-in-out"
+                    >
+                      <Linkedin size={24} />
+                    </Link>
+                    <Link
+                      to="/"
+                      target="_blank"
+                      className="hover:scale-125 transition duration-300 ease-in-out"
+                    >
+                      <Youtube color="red" size={24} />
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
