@@ -40,7 +40,9 @@ const BlogCard = ({ blog, catid }) => {
         </Link>
         {!hasBeenSaved && (
           <button
-            onClick={() => dispatch({ type: "SAVE", payload: blog })}
+            onClick={() =>
+              dispatch({ type: "SAVE", payload: { ...blog, catid } })
+            }
             className="btn_secondary"
           >
             Save Blog
@@ -48,7 +50,9 @@ const BlogCard = ({ blog, catid }) => {
         )}
         {hasBeenSaved && (
           <button
-            onClick={() => dispatch({ type: "REMOVE", payload: blog })}
+            onClick={() =>
+              dispatch({ type: "REMOVE", payload: { ...blog, catid } })
+            }
             className="btn_remove"
           >
             Remove Blog
