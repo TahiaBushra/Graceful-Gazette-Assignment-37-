@@ -30,9 +30,12 @@ const Header = () => {
           pathname === "/" ? "justify-center" : "justify-between "
         }`}
       >
-        <div className={`${pathname === "/" ? "hidden" : "inline-block"}`}>
+        <Link
+          to="/"
+          className={`${pathname === "/" ? "hidden" : "inline-block"}`}
+        >
           <div className="flex backdrop-blur-lg rounded-full border overflow-hidden bg">
-            <div className="rounded-2xl w-52 h-auto bg-gray-900">
+            <div className="rounded-2xl w-52 h-auto bg-gray-900 cursor-pointer">
               <img
                 src="/src/assets/images/New_Project-removebg-preview (1).png"
                 alt="fashion pic"
@@ -40,7 +43,7 @@ const Header = () => {
               />
             </div>
           </div>
-        </div>
+        </Link>
         <button
           onClick={() => setNavAppear(!navAppear)}
           className="aspect-square w-14 border backdrop-blur-lg rounded-full flex items-center justify-center bg-gradient-to-tr from-amber-50 to-orange-100 text-gray-900 hover:scale-125 transition duration-300 ease-in-out"
