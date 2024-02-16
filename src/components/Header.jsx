@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <>
       <div
-        className={`flex overflow-hidden fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-20 ${
+        className={`flex overflow-hidden fixed items-center z-[100] container left-1/2 -translate-x-1/2 top-10 w-full px-5 sm:px-20 ${
           pathname === "/" ? "justify-center" : "justify-between "
         }`}
       >
@@ -42,7 +42,7 @@ const Header = () => {
             <div className="flex backdrop-blur-lg rounded-full border overflow-hidden bg">
               <div className="rounded-2xl w-52 h-auto bg-gray-900 cursor-pointer">
                 <img
-                  src="../assets/images/New_Project-removebg-preview (1).png"
+                  src="/assets/images/New_Project-removebg-preview (1).png"
                   alt="fashion pic"
                   className="w-full h-full object-cover hover:scale-110 transition duration-300 ease-in-out"
                 />
@@ -69,11 +69,11 @@ const Header = () => {
             ></div>
             <motion.div
               onClick={() => setNavAppear(false)}
-              initial={{ x: "25vw" }}
+              initial={{ x: "100%" }}
               whileInView={{ x: 0 }}
-              exit={{ x: "25vw" }}
+              exit={{ x: "100%" }}
               transition={{ duration: 0.75, ease: "easeInOut" }}
-              className="fixed right-0 top-0 bottom-0 w-[25vw] h-full bg-zinc-50 z-[101] shadow-2xl"
+              className="fixed right-0 top-0 bottom-0  w-screen sm:w-[50vw] lg:w-[35vw] xl:w-[25vw] h-full bg-zinc-50 z-[101] shadow-2xl"
             >
               <button
                 onClick={() => setNavAppear(false)}
@@ -106,7 +106,7 @@ const Header = () => {
                   </Link>
                 ))}
               </div>
-              <div className="pb-5 px-5 sm:mt-40 flex flex-col gap-5 items-start">
+              <div className="pb-5 px-5 mt-10 sm:mt-40 flex flex-col gap-5 items-start">
                 <p className="uppercase text-sm font-semibold tracking-widest text-gray-400 border-b w-full pb-2.5">
                   Socials
                 </p>

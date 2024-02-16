@@ -3,11 +3,14 @@ import Overlay from "../components/Overlay";
 import { categories } from "../data/categories";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Categories = () => {
   const [expandCategory, setExpandCategory] = useState(2);
+  const matches = useMediaQuery("(min-width: 1024px)");
+
   return (
-    <div className="w-screen h-screen flex">
+    <div className="w-screen h-screen flex flex-col lg:flex-row">
       {categories.map((category, index) => (
         <Link
           onMouseOver={() => setExpandCategory(index)}
@@ -15,7 +18,7 @@ const Categories = () => {
           key={category.id}
           className={`h-full ${
             index === expandCategory ? "w-[40vw]" : "w-[20vw]"
-          } overflow-hidden relative`}
+          } overflow-hidden relative ${!matches && "w-full"}`}
         >
           <motion.div
             initial={{ y: "-100%" }}
@@ -33,7 +36,11 @@ const Categories = () => {
               <h2 className="text-4xl font-semibold antialiased">
                 {category.title}
               </h2>
-              <p className={expandCategory === index ? "block" : "hidden"}>
+              <p
+                className={
+                  expandCategory === index && matches ? "block" : "hidden"
+                }
+              >
                 {category.description}
               </p>
             </div>

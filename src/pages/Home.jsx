@@ -14,7 +14,7 @@ const Home = () => {
             initial={{ y: "-100%" }}
             whileInView={{ y: 0 }}
             transition={{ duration: 0.75, ease: "easeInOut" }}
-            className="text-6xl text-white font-bold text-center antialiased leading-tight py-8"
+            className="text-5xl sm:text-7xl text-white font-bold text-center antialiased leading-tight py-8"
           >
             Graceful Gazette: Unveiling the Artistry of Fashion"
           </motion.h1>
@@ -32,7 +32,7 @@ const Home = () => {
         </div>
       </div>
       {/* Social Links */}
-      <div className="absolute bottom-10 right-10 z-[3] flex items-center justify-center gap-5 overflow-hidden">
+      <div className="absolute hidden bottom-10 right-10 z-[3] md:flex items-center gap-5 overflow-hidden">
         <motion.div
           initial={{ y: "100%" }}
           whileInView={{ y: 0 }}
